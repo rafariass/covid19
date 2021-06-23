@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+    <link rel="manifest" href="assets/favicon/site.webmanifest" />
+    <link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="assets/css/bootstrap_v4.6/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.css"/>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Desafío Hito 1 y 2 | Situación Mundial</title>
+  </head>
+  <body>
+
+    <!-- Menu -->
+    <section id="navBar" class="sticky-top">
+      <div class="conatiner-fluid bg-dark">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="javascript:void(0)"><i class="fas fa-virus"></i> Covid19</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0)">Inicio</a>
+                </li>
+                <li class="nav-item d-none">
+                  <a class="nav-link" href="javascript:void(0)">Situacion Chile</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0)" data-toggle="modal" data-target="#logInModal">Iniciar Sesion</a>
+                </li>
+                <li class="nav-item d-none">
+                  <a class="nav-link" href="javascript:void(0)">Cerrar Sesion</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <!-- Inicio Page -->
+    <section id="covidChartHome" class="container pt-5 py-4">
+      <canvas id="myChart"></canvas>
+      <div id="covidTable" class="container pt-5 py-4"></div>
+    </section>
+
+    <!-- Situacion_Chile Page -->
+    <section id="situacionChile" class="container pt-5 py-4 d-none">
+    </section>
+
+    <!-- Modal location -->
+    <div class="modal fade" id="locationModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+          <div class="modal-body" id="modalChartLocation">
+            <canvas id="myChartLocation"></canvas>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-dark w-25" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal LogIn -->
+    <div class="modal fade" id="logInModal" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="logInModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-dark text-white text-center justify-content-center">
+            <h3 class="h3"><i class="fas fa-virus"></i> Covid19</h3>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">@</div>
+                  </div>
+                  <input type="email" class="form-control" aria-describedby="emailHelp" value="Sincere@april.biz">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group mb-2">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text"><i class="fas fa-key"></i></div>
+                  </div>
+                  <input type="password" class="form-control" value="secret">
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary w-25" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-dark w-25" id="btnModalLogin">Log In</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal loader -->
+    <div class="modal" id="loadModal" tabindex="-1" aria-labelledby="loadModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+      <div class="modal-dialog modal-dialog-centered" style="width: 192px; height: 192px;">
+        <div class="modal-content m-5">
+          <div class="modal-body text-center">
+            <img src="assets/img/ajax-loader.gif" style="width: 64px; height: 64px;">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="container text-center pt-5">
+      <hr class="border border-dark">
+      <p>Copyright&#0169; 2021 a
+        <span id="anio"></span> - Todos los derechos reservados.<br>Created by
+        <a href="javascript:void(0)" class="text-dark font-weight-bold text-decoration-none">
+          <img src="assets/favicon/favicon-32x32.png">
+          <i class="fas fa-terminal"></i><span class="rafariass">RaFariasS&#174;</span>.
+        </a>
+      </p>
+    </footer>
+
+    <!-- JS -->
+    <script type="text/javascript" src="assets/js/jquery_v3.5.1/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="assets/js/popper_v1.16.1/popper.js"></script>
+    <script type="text/javascript" src="assets/js/bootstrap_v4.6/bootstrap.js"></script>
+    <script type="text/javascript" src="https://kit.fontawesome.com/46d8f1377c.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js" integrity="sha512-bZS47S7sPOxkjU/4Bt0zrhEtWx0y0CRkhEp8IckzK+ltifIIE9EMIMTuT/mEzoIMewUINruDBIR/jJnbguonqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.24/datatables.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script type="module" src="assets/js/main.js"></script>
+  </body>
+</html>

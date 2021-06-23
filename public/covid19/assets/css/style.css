@@ -1,0 +1,19 @@
+/*! Fuentes del proyecto */
+@import url('fonts.css');
+
+/*! Variables globales del proyecto */
+:root {
+    --RaFariasS-Font: 'JetBrainsMono-Regular';
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.rafariass {
+    font-family: var(--RaFariasS-Font);
+}
+
+table {
+    font-size: 14px;
+}
